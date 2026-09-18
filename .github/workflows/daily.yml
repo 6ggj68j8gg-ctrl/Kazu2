@@ -32,12 +32,12 @@ jobs:
           import requests
           import datetime
 
-          # 混入した目に見えない特殊文字を自動でクリーンアップする処理
+          # 半角英数字・通常の記号（ASCII文字）以外を完全に排除する強力なフィルター
           raw_token = os.environ.get("LINE_TOKEN", "")
-          LINE_TOKEN = raw_token.strip().replace("\u2060", "").replace("\u200b", "").replace(" ", "")
+          LINE_TOKEN = "".join(c for c in raw_token if ord(c) < 128).strip()
           
           raw_user = os.environ.get("USER_ID", "")
-          USER_ID = raw_user.strip().replace("\u2060", "").replace("\u200b", "").replace(" ", "")
+          USER_ID = "".join(c for c in raw_user if ord(c) < 128).strip()
 
           def send_line(msg):
               url = "https://api.line.me/v2/bot/message/push"
