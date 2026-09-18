@@ -2,9 +2,8 @@ name: Keirin Daily Prediction Bot
 
 on:
   schedule:
-    # 毎朝7:30(JST) に自動実行 (UTC時間で22:30を指定)
     - cron: '30 22 * * *'
-  workflow_dispatch: # 手動テスト用ボタン
+  workflow_dispatch:
 
 jobs:
   run-bot:
@@ -51,4 +50,3 @@ jobs:
           send_line(text)
           print("送信完了")
           EOF
-
